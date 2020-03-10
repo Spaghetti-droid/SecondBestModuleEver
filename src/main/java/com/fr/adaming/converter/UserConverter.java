@@ -6,7 +6,7 @@ import com.fr.adaming.entity.User;
 
 public class UserConverter {
 
-	public User regConverterDtoToUser(RegisterDto regdto) {
+	public static User regConverterDtoToUser(RegisterDto regdto) {
 
 		User user = new User();
 
