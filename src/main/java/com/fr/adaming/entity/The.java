@@ -5,10 +5,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Entity
-@Data
+@Data 
 public class The {
 	
 	@Id
@@ -22,5 +23,7 @@ public class The {
 	private int poids;
 	
 	private boolean enSachet;
+	
+	
 
 }
