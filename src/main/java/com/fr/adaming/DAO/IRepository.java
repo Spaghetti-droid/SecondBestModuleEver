@@ -12,6 +12,6 @@ public interface IRepository extends JpaRepository<User, Integer>{
 	public User findByEmailAndPwd(String email, String pwd);
 	
 	
-
+ 
 
 }

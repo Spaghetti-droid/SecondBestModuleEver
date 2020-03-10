@@ -7,11 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fr.adaming.DAO.IRepository;
+import com.fr.adaming.dto.ModifierDto;
 import com.fr.adaming.entity.User;
 
 @Service
 public class UserService {
-	
+
 	@Autowired
 	private IRepository repo;
 
@@ -42,7 +43,17 @@ public class UserService {
 	public void deleteAll() {
 		repo.deleteAll();
 	}
-	
-	
+
+	public void modifierUser(ModifierDto dto) {
+		User u;
+		int id = dto.getId();
+		u = repo.findById(id).get();
+		u.setEmail(dto.getMail());
+		u.setNom(dto.getName());
+		u.setPwd(dto.getMotDePasse());
+		
+		repo.save(u);
+
+	}
 
 }
