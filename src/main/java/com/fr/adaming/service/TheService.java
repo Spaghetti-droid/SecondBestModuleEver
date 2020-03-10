@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fr.adaming.DAO.ITheRepository;
+import com.fr.adaming.dto.TheDto;
 import com.fr.adaming.entity.The;
 
 @Service
@@ -39,6 +40,17 @@ public class TheService {
 		repo.deleteAll();
 	}
 	
-	
+	public void modifier(TheDto dto) {
+		
+		The the = repo.findById(dto.getId()).get();
+		
+		the.setMarque(dto.getBrand());
+		the.setType(dto.getVariety());
+		the.setPoids(dto.getWeight());
+		the.setEnSachet(dto.isInBags());
+		
+		repo.save(the);
+		
+	}
 
 }

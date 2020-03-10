@@ -1,5 +1,8 @@
 package com.fr.adaming.converter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fr.adaming.DAO.ITheRepository;
@@ -35,6 +38,20 @@ public class TheConverter {
 		dto.setInBags(the.isEnSachet());
 		
 		return dto;
+		
+	}
+	
+	public static List<TheDto> convertThetoDto(List<The> theList){
+		
+		List<TheDto> dtoList = new ArrayList<TheDto>();
+		
+		for (The the: theList) {
+			
+			dtoList.add(convertTheToDto(the));
+			
+		}
+		
+		return dtoList;
 		
 	}
 
