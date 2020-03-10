@@ -19,16 +19,16 @@ public class UserService {
 		return repo.findByEmailAndPwd(email, pwd);
 	}
 
-	public <S extends User> S save(S entity) {
-		return repo.save(entity);
+	public User save(User user) {
+		return repo.save(user);
 	}
 
 	public List<User> findAll() {
 		return repo.findAll();
 	}
 
-	public Optional<User> findById(Integer id) {
-		return repo.findById(id);
+	public User findById(Integer id) {
+		return repo.findById(id).get();
 	}
 
 	public void deleteById(Integer id) {
