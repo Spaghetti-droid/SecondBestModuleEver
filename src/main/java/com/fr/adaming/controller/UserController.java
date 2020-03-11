@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fr.adaming.DAO.IUserService;
 import com.fr.adaming.converter.UserConverter;
 import com.fr.adaming.dto.LoginDto;
 import com.fr.adaming.dto.ModifierDto;
 import com.fr.adaming.dto.RegisterDto;
+import com.fr.adaming.service.IUserService;
 import com.fr.adaming.service.UserService;
 
 @RestController
