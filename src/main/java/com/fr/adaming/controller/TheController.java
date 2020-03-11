@@ -2,34 +2,26 @@ package com.fr.adaming.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fr.adaming.converter.TheConverter;
 import com.fr.adaming.dto.FullTheDto;
+import com.fr.adaming.dto.ITheController;
 import com.fr.adaming.dto.TheDto;
 import com.fr.adaming.service.ITheService;
-import com.fr.adaming.service.TheService;
 
 @RestController
-@RequestMapping(path = "/the")
-public class TheController {
+public class TheController implements ITheController{
 
 	@Autowired
 	private ITheService service;
 
-	@PostMapping
-	public ResponseEntity<?> ajouter(@RequestBody TheDto dto) {
+	public ResponseEntity<?> ajouter(@Valid TheDto dto) {
 
 		ResponseEntity<?> resp = null;
 
@@ -48,8 +40,7 @@ public class TheController {
 		return resp;
 	}
 
-	@DeleteMapping(path = "/{id}")
-	public ResponseEntity<?> supprimerThe(@PathVariable(name = "id") int id) {
+	public ResponseEntity<?> supprimerThe(int id) {
 
 		ResponseEntity<?> resp = null;
 
@@ -65,8 +56,7 @@ public class TheController {
 
 	}
 
-	@PutMapping
-	public ResponseEntity<?> modifier(@RequestBody FullTheDto dto) {
+	public ResponseEntity<?> modifier(@Valid FullTheDto dto) {
 
 		ResponseEntity<?> resp = null;
 
@@ -83,8 +73,7 @@ public class TheController {
 
 	}
 
-	@GetMapping(path = "/{id}")
-	public ResponseEntity<?> get(@PathVariable(name = "id") int id) {
+	public ResponseEntity<?> get(int id) {
 
 		ResponseEntity<?> resp = null;
 
@@ -104,7 +93,6 @@ public class TheController {
 		return resp;
 	}
 
-	@GetMapping(path = "/all")
 	public ResponseEntity<?> getAll() {
 
 		ResponseEntity<?> resp = null;
