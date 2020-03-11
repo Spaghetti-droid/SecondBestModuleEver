@@ -3,12 +3,16 @@ package com.fr.adaming.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.fr.adaming.DAO.IUserService;
 import com.fr.adaming.converter.UserConverter;
 import com.fr.adaming.dto.LoginDto;
 import com.fr.adaming.dto.ModifierDto;
@@ -20,7 +24,7 @@ import com.fr.adaming.service.UserService;
 public class UserController {
 
 	@Autowired
-	UserService service;
+	public IUserService service;
 
 	@PostMapping(path = "/sleigh")
 	public ResponseEntity<?> login(@RequestBody LoginDto dto) {
@@ -50,7 +54,7 @@ public class UserController {
 
 	}
 
-	@GetMapping(path = "/mod")
+	@DeleteMapping(path = "/{id}")
 	public ResponseEntity<?> suprimmerUser(@PathVariable(name = "id") int id) {
 		service.deleteById(id);
 
@@ -63,7 +67,7 @@ public class UserController {
 
 	}
 
-	@PostMapping(path = "/update")
+	@PutMapping(path = "/{id}")
 	public ResponseEntity<?> modifierUser(@RequestBody ModifierDto dto) {
 
 		service.modifierUser(dto);

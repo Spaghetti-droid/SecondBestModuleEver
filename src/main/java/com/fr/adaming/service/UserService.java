@@ -7,11 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fr.adaming.DAO.IRepository;
+import com.fr.adaming.DAO.IUserService;
 import com.fr.adaming.dto.ModifierDto;
 import com.fr.adaming.entity.User;
 
 @Service
-public class UserService {
+public class UserService implements IUserService{
 
 	@Autowired
 	private IRepository repo;
