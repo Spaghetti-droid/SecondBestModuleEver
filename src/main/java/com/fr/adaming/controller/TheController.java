@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,7 +26,7 @@ public class TheController {
 	@Autowired
 	private TheService service;
 
-	@PostMapping(path = "/ajouter")
+	@PostMapping
 	public ResponseEntity<?> ajouter(@RequestBody TheDto dto) {
 
 		ResponseEntity<?> resp = null;
@@ -48,13 +49,21 @@ public class TheController {
 	@DeleteMapping(path = "/{id}")
 	public ResponseEntity<?> supprimerThe(@PathVariable(name = "id") int id) {
 
-		service.deleteById(id);
+		ResponseEntity<?> resp = null;
 
-		return ResponseEntity.status(HttpStatus.OK).body("Un thé en moins :( ");
+		try {
+			service.deleteById(id);
+			resp = ResponseEntity.status(HttpStatus.OK).body("Un thé en moins :( ");
+		} catch (Exception e) {
+			e.printStackTrace();
+			resp = ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Problème pendant la suppression.");
+		}
+
+		return resp;
 
 	}
 
-	@PostMapping(path = "/modifier")
+	@PutMapping
 	public ResponseEntity<?> modifier(@RequestBody TheDto dto) {
 
 		ResponseEntity<?> resp = null;
@@ -92,25 +101,27 @@ public class TheController {
 
 		return resp;
 	}
-	
+
 	@GetMapping(path = "/all")
-	public ResponseEntity<?> getAll(){
-		
+	public ResponseEntity<?> getAll() {
+
 		ResponseEntity<?> resp = null;
-		
+
 		try {
-			
-			List<TheDto> dtoList = TheConverter.convertThetoDto(service.findAll()); //Note: Ceci est la version du convertisseur qui prend une liste en entrée
-			
-			resp=ResponseEntity.status(HttpStatus.OK).body(dtoList);
-			
+
+			List<TheDto> dtoList = TheConverter.convertThetoDto(service.findAll()); // Note: Ceci est la version du
+																					// convertisseur qui prend une liste
+																					// en entrée
+
+			resp = ResponseEntity.status(HttpStatus.OK).body(dtoList);
+
 		} catch (Exception e) {
 			e.printStackTrace();
-			resp=ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).body("Exception pendant getAll");
+			resp = ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).body("Exception pendant getAll");
 		}
-		
+
 		return resp;
-		
+
 	}
 
 }
