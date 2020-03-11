@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fr.adaming.converter.TheConverter;
+import com.fr.adaming.dto.FullTheDto;
 import com.fr.adaming.dto.TheDto;
+import com.fr.adaming.service.ITheService;
 import com.fr.adaming.service.TheService;
 
 @RestController
@@ -24,7 +26,7 @@ import com.fr.adaming.service.TheService;
 public class TheController {
 
 	@Autowired
-	private TheService service;
+	private ITheService service;
 
 	@PostMapping
 	public ResponseEntity<?> ajouter(@RequestBody TheDto dto) {
@@ -64,7 +66,7 @@ public class TheController {
 	}
 
 	@PutMapping
-	public ResponseEntity<?> modifier(@RequestBody TheDto dto) {
+	public ResponseEntity<?> modifier(@RequestBody FullTheDto dto) {
 
 		ResponseEntity<?> resp = null;
 
@@ -109,7 +111,7 @@ public class TheController {
 
 		try {
 
-			List<TheDto> dtoList = TheConverter.convertThetoDto(service.findAll()); // Note: Ceci est la version du
+			List<FullTheDto> dtoList = TheConverter.convertThetoFullDto(service.findAll()); // Note: Ceci est la version du
 																					// convertisseur qui prend une liste
 																					// en entrée
 

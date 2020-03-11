@@ -7,11 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fr.adaming.DAO.ITheRepository;
+import com.fr.adaming.dto.FullTheDto;
 import com.fr.adaming.dto.TheDto;
 import com.fr.adaming.entity.The;
 
 @Service
-public class TheService {
+public class TheService implements ITheService{
 	
 	@Autowired
 	private ITheRepository repo;
@@ -40,7 +41,7 @@ public class TheService {
 		repo.deleteAll();
 	}
 	
-	public void modifier(TheDto dto) {
+	public void modifier(FullTheDto dto) {
 		
 		The the = repo.findById(dto.getId()).get();
 		

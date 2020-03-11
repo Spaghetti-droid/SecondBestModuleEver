@@ -5,8 +5,6 @@ import lombok.Data;
 @Data
 public class TheDto {
 	
-	private Integer id;
-	
 	private String variety;
 	
 	private String brand;
